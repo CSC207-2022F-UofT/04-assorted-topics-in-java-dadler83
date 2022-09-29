@@ -28,7 +28,20 @@ class DrivableMap {
      *       Return true if the Drivable was added to drivable_map.
      */
 
-
+    /**
+     * Adds the requested value at the id if the id is not already in the drivable_map
+     * @param id the key value for the HashMap
+     * @param value the object to be stored at id in the HashMap
+     * @return true if the value was successfully added, false otherwise
+     */
+    public boolean addDrivable(String id, Drivable value) {
+        if (drivable_map.containsKey(id)) {
+            return false;
+        } else {
+            drivable_map.put(id, value);
+            return true;
+        }
+    }
 
 
     /* TODO: Write a method named hasFasterThan that takes an int (a speed)
@@ -38,7 +51,19 @@ class DrivableMap {
      * iterate through drivable_map.
      */
 
-
+    /**
+     * Checks if the drivable_map has an item with speed greater than or equal to the input speed
+     * @param speed input speed to check against map
+     * @return true if it has an object with faster or equal speed than the input speed, false if not
+     */
+    public boolean hasFasterThan(int speed) {
+        for (Drivable item : drivable_map.values()) {
+            if (item.getMaxSpeed() >= speed) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 
@@ -47,7 +72,17 @@ class DrivableMap {
      *       drivable_map.
      */
 
-
-
-    
+    /**
+     * Gets an ArrayList of all Tradable items in drivable_map
+     * @return the List of Tradable items in drivable_map
+     */
+    public List<Tradable> getTradable() {
+        List<Tradable> tradables = new ArrayList<Tradable>();
+        for (Drivable item : drivable_map.values()) {
+            if (item instanceof Tradable) {
+                tradables.add((Tradable) item);
+            }
+        }
+        return tradables;
+    }
 }
